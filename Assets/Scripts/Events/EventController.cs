@@ -8,3 +8,11 @@ public class EventController
     public void InvokeEvent() => baseEvent?.Invoke();
 }
 
+public class EventController<T>                   // generic class
+{
+    public Action<T> baseEvent;
+    public void AddListener(Action<T> listener) => baseEvent += listener;
+    public void RemoveListener(Action<T> listener) => baseEvent -= listener;
+    public void InvokeEvent(T type) => baseEvent?.Invoke(type);
+}
+
