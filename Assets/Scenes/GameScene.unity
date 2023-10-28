@@ -2228,6 +2228,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: 667724600942481522, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
       propertyPath: soundService
       value: 
@@ -2256,6 +2257,8 @@ PrefabInstance:
       propertyPath: soundService
       value: 
       objectReference: {fileID: 203687011}
+=======
+>>>>>>> 160156fb4b631d530b8e2b29fa5e180dc6f4714d
     - target: {fileID: 5325831579243014017, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2300,22 +2303,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6752750673420198879, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
-      propertyPath: soundService
-      value: 
-      objectReference: {fileID: 203687011}
-    - target: {fileID: 6752750673610657977, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
-      propertyPath: soundService
-      value: 
-      objectReference: {fileID: 203687011}
-    - target: {fileID: 6752750674094668609, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
-      propertyPath: soundService
-      value: 
-      objectReference: {fileID: 203687011}
     - target: {fileID: 8090694453975587124, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
       propertyPath: m_Name
       value: House
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8410985323073775251, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
       propertyPath: soundService
       value: 
@@ -2350,6 +2342,9 @@ PrefabInstance:
     - {fileID: 8410985324735834856, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
     - {fileID: 3542250534102899431, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
     - {fileID: 6752750674094668609, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
+=======
+    m_RemovedComponents: []
+>>>>>>> 160156fb4b631d530b8e2b29fa5e180dc6f4714d
   m_SourcePrefab: {fileID: 100100000, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
 --- !u!65 &8225950124344110251
 BoxCollider:

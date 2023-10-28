@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightSwitchView : MonoBehaviour, IInteractable
 {
     [SerializeField] private List<Light> lightsources = new List<Light>();
+    [SerializeField] private SoundType soundType;
     private SwitchState currentState;
     public static event Action OnLightSwitchToggled;
 
@@ -13,12 +14,21 @@ public class LightSwitchView : MonoBehaviour, IInteractable
         EventService.Instance.OnLightSwitchToggled.AddListener(onLightSwitch);
         EventService.Instance.OnLightsOffByGhostEvent.AddListener(onLightsTurnedOffByGhost);
     }
+    private void OnDisable()
+    {
+        EventService.Instance.OnLightSwitchToggled.RemoveListener(onLightsToggled);
+        EventService.Instance.OnLightsOffByGhostEvent.RemoveListener(onLightsTurnedOffByGhost);
+    }
 
-    private void OnDisable() => EventService.Instance.OnLightSwitchToggled.RemoveListener(onLightSwitch);
 
     private void Start() => currentState = SwitchState.Off;
 
-    public void Interact() => EventService.Instance.OnLightSwitchToggled.InvokeEvent();
+
+    public void Interact()
+    {
+        GameService.Instance.GetInstructionView().HideInstruction();
+        EventService.Instance.OnLightSwitchToggled.InvokeEvent();
+    }
 
     private void toggleLights()
     {
@@ -70,5 +80,11 @@ public class LightSwitchView : MonoBehaviour, IInteractable
         setLights(false);
         GameService.Instance.GetSoundView().PlaySoundEffects(SoundType.SwitchSound);
         GameService.Instance.GetInstructionView().ShowInstruction(InstructionType.LightsOff);
+    }
+
+    private void onLightsToggled()
+    {
+        toggleLights();
+        GameService.Instance.GetSoundView().PlaySoundEffects(soundType);
     }
 }

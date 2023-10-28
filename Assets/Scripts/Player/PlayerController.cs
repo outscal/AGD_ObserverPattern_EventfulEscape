@@ -33,7 +33,8 @@ public class PlayerController
         EventService.Instance.OnLightsOffByGhostEvent.AddListener(onLightsTurnedOffByGhost);
     }
 
-    ~PlayerController() {
+    ~PlayerController()
+    {
         EventService.Instance.OnLightSwitchToggled.RemoveListener(LightSwitchToggled);
         EventService.Instance.OnKeyPickedUp.RemoveListener(onKeysPickedUp);
         EventService.Instance.OnLightsOffByGhostEvent.RemoveListener(onLightsTurnedOffByGhost);
@@ -96,7 +97,7 @@ public class PlayerController
     }
 
     private void onLightsTurnedOffByGhost() => PlayerState = PlayerState.InDark;
-    
+
 
     private void onKeysPickedUp(int keys)
     {
