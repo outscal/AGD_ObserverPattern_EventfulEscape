@@ -27,11 +27,13 @@ public class PlayerController
 
 
         playerState = PlayerState.InDark;
-        EventService.Instance.lightToggledAction.AddListener(LightSwitchToggled); 
+        EventService.Instance.lightToggledAction.AddListener(LightSwitchToggled);
+        EventService.Instance.OnKeyPickedUp.AddListener(onKeysPickedUp);
     }
 
     ~PlayerController() {
         EventService.Instance.lightToggledAction.RemoveListener(LightSwitchToggled);
+        EventService.Instance.OnKeyPickedUp.RemoveListener(onKeysPickedUp);
     }
 
 
@@ -89,5 +91,10 @@ public class PlayerController
         {
             PlayerState = PlayerState.InDark;
         }
+    }
+
+    private void onKeysPickedUp(int keys)
+    {
+        KeysEquipped = keys;
     }
 }
