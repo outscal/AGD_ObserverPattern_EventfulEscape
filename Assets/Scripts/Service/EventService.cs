@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventService : MonoBehaviour
+public class EventService
 {
     private static EventService instance;
     public static EventService Instance

@@ -27,7 +27,11 @@ public class PlayerController
         this.playerScriptableObject.KeysEquipped = 0;
 
         playerState = PlayerState.InDark;
-        LightSwitchView.lightToggledAction += LightSwitchToggled;
+        EventService.Instance.lightToggledAction.AddListener(LightSwitchToggled); 
+    }
+
+    ~PlayerController() {
+        EventService.Instance.lightToggledAction.RemoveListener(LightSwitchToggled);
     }
 
     public void Interact() => IsInteracted = Input.GetKeyDown(KeyCode.E) ? true : (Input.GetKeyUp(KeyCode.E) ? false : IsInteracted);
