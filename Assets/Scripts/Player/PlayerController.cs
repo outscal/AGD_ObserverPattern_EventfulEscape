@@ -22,9 +22,9 @@ public class PlayerController
     {
         this.playerView = playerView;
         this.playerView.SetController(this);
-
         this.playerScriptableObject = playerScriptableObject;
         this.playerScriptableObject.KeysEquipped = 0;
+
 
         playerState = PlayerState.InDark;
         EventService.Instance.lightToggledAction.AddListener(LightSwitchToggled); 
@@ -33,6 +33,7 @@ public class PlayerController
     ~PlayerController() {
         EventService.Instance.lightToggledAction.RemoveListener(LightSwitchToggled);
     }
+
 
     public void Interact() => IsInteracted = Input.GetKeyDown(KeyCode.E) ? true : (Input.GetKeyUp(KeyCode.E) ? false : IsInteracted);
 
