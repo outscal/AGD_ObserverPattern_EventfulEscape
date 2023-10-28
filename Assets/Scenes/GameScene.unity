@@ -2240,6 +2240,10 @@ PrefabInstance:
       propertyPath: soundService
       value: 
       objectReference: {fileID: 203687011}
+    - target: {fileID: 2443645658748825555, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
+      propertyPath: soundType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3492344741786150290, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
       propertyPath: gameUIView
       value: 
