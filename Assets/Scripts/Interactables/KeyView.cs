@@ -9,8 +9,7 @@ public class KeyView : MonoBehaviour, IInteractable
         GameService.Instance.GetInstructionView().HideInstruction();
         GameService.Instance.GetSoundView().PlaySoundEffects(SoundType.KeyPickUp);
         currentKey++;
-        gameUIView.UpdateKeyText();
-
+        EventService.Instance.OnKeyPickedUp.InvokeEvent(currentKey);
         gameObject.SetActive(false);
     }
 }
