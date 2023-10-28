@@ -7,15 +7,15 @@ public class LightSwitchView : MonoBehaviour, IInteractable
 {
     [SerializeField] private List<Light> lightsources = new List<Light>();
     private SwitchState currentState;
-    public static event Action OnLightSwitchToggled;
+    public static event Action lightToggledAction;
 
-    private void OnEnable() => OnLightSwitchToggled += onLightSwitch;
+    private void OnEnable() => lightToggledAction += onLightSwitch;
 
-    private void OnDisable() => OnLightSwitchToggled -= onLightSwitch;
+    private void OnDisable() => lightToggledAction -= onLightSwitch;
 
     private void Start() => currentState = SwitchState.Off;
 
-    public void Interact() => OnLightSwitchToggled?.Invoke();
+    public void Interact() => lightToggledAction?.Invoke();
 
     private void toggleLights()
     {
