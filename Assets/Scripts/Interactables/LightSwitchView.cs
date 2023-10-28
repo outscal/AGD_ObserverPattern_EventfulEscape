@@ -8,7 +8,11 @@ public class LightSwitchView : MonoBehaviour, IInteractable
     private SwitchState currentState;
     public static event Action OnLightSwitchToggled;
 
-    private void OnEnable() => EventService.Instance.OnLightSwitchToggled.AddListener(onLightSwitch);
+    private void OnEnable()
+    {
+        EventService.Instance.OnLightSwitchToggled.AddListener(onLightSwitch);
+        EventService.Instance.OnLightsOffByGhostEvent.AddListener(onLightsTurnedOffByGhost);
+    }
 
     private void OnDisable() => EventService.Instance.OnLightSwitchToggled.RemoveListener(onLightSwitch);
 
@@ -39,10 +43,32 @@ public class LightSwitchView : MonoBehaviour, IInteractable
         }
     }
 
+    private void setLights(bool lights)
+    {
+        foreach (Light lightSource in lightsources)
+        {
+            lightSource.enabled = lights;
+        }
+        if (lights)
+        {
+            currentState = SwitchState.On;
+        }
+        else
+        {
+            currentState = SwitchState.Off;
+        }
+    }
+
     private void onLightSwitch()
     {
         toggleLights();
         GameService.Instance.GetSoundView().PlaySoundEffects(SoundType.SwitchSound);
         GameService.Instance.GetInstructionView().HideInstruction();
+    }
+    private void onLightsTurnedOffByGhost()
+    {
+        setLights(false);
+        GameService.Instance.GetSoundView().PlaySoundEffects(SoundType.SwitchSound);
+        GameService.Instance.GetInstructionView().ShowInstruction(InstructionType.LightsOff);
     }
 }
