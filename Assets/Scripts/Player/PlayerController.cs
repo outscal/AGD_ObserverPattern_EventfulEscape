@@ -1,6 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
 public class PlayerController
 {
+    public bool IsInteracted;
+
     private PlayerView playerView;
     private PlayerScriptableObject playerScriptableObject;
     private float velocity;
@@ -9,9 +14,9 @@ public class PlayerController
     private float mouseX;
     private PlayerState playerState;
 
-    public bool IsInteracted;
     public int KeysEquipped { get => playerScriptableObject.KeysEquipped; set => playerScriptableObject.KeysEquipped = value; }
     public PlayerState PlayerState { get => playerState; private set => playerState = value; }
+
 
     public PlayerController(PlayerView playerView, PlayerScriptableObject playerScriptableObject)
     {
@@ -19,20 +24,22 @@ public class PlayerController
         this.playerView.SetController(this);
         this.playerScriptableObject = playerScriptableObject;
         this.playerScriptableObject.KeysEquipped = 0;
+
+
         playerState = PlayerState.InDark;
 
-        EventService.Instance.OnLightsOffByGhostEvent.AddListener(onLightsOffByGhost);
-        EventService.Instance.OnLightSwitchToggled.AddListener(onLightsToggled);
-        EventService.Instance.OnKeyPickedUp.AddListener(OnKeyPickedUp);
-        EventService.Instance.PlayerEscapedEvent.AddListener(DisableControls);
+        EventService.Instance.OnLightSwitchToggled.AddListener(LightSwitchToggled);
+        EventService.Instance.OnKeyPickedUp.AddListener(onKeysPickedUp);
+        EventService.Instance.OnLightsOffByGhostEvent.AddListener(onLightsTurnedOffByGhost);
     }
+
     ~PlayerController()
     {
-        EventService.Instance.OnLightsOffByGhostEvent.RemoveListener(onLightsOffByGhost);
-        EventService.Instance.OnLightSwitchToggled.RemoveListener(onLightsToggled);
-        EventService.Instance.OnKeyPickedUp.RemoveListener(OnKeyPickedUp);
-        EventService.Instance.PlayerEscapedEvent.RemoveListener(DisableControls);
+        EventService.Instance.OnLightSwitchToggled.RemoveListener(LightSwitchToggled);
+        EventService.Instance.OnKeyPickedUp.RemoveListener(onKeysPickedUp);
+        EventService.Instance.OnLightsOffByGhostEvent.RemoveListener(onLightsTurnedOffByGhost);
     }
+
     public void Interact() => IsInteracted = Input.GetKeyDown(KeyCode.E) ? true : (Input.GetKeyUp(KeyCode.E) ? false : IsInteracted);
 
     public void Jump(Rigidbody playerRigidbody, Transform transform)
@@ -47,7 +54,7 @@ public class PlayerController
 
     public void Move(Rigidbody playerRigidbody, Transform transform)
     {
-        getInput();
+        GetInput();
 
         Quaternion rotation;
         Vector3 position;
@@ -60,14 +67,9 @@ public class PlayerController
     public void KillPlayer()
     {
         PlayerState = PlayerState.Dead;
-        EventService.Instance.PlayerDeathEvent.InvokeEvent();
     }
 
-    private void onLightsOffByGhost() => PlayerState = PlayerState.InDark;
-    private void OnKeyPickedUp(int keys) => KeysEquipped = keys;
-    private void DisableControls() => playerView.enabled = false;
-
-    private void getInput()
+    private void GetInput()
     {
         horizontalAxis = Input.GetAxis("Horizontal");
         verticalAxis = Input.GetAxis("Vertical");
@@ -82,11 +84,23 @@ public class PlayerController
         rotation = playerRigidbody.rotation * Quaternion.Euler(lookRotation);
         position = (transform.position) + (velocity * movement) * Time.fixedDeltaTime;
     }
-    private void onLightsToggled()
+    private void LightSwitchToggled()
     {
         if (PlayerState == PlayerState.InDark)
+        {
             PlayerState = PlayerState.None;
+        }
         else
+        {
             PlayerState = PlayerState.InDark;
+        }
+    }
+
+    private void onLightsTurnedOffByGhost() => PlayerState = PlayerState.InDark;
+
+
+    private void onKeysPickedUp(int keys)
+    {
+        KeysEquipped = keys;
     }
 }

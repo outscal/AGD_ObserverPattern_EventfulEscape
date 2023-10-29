@@ -4,15 +4,24 @@ public class PlayerSanity : MonoBehaviour
 {
     [SerializeField] private float sanityLevel = 100.0f;
     [SerializeField] private float sanityDropRate = 0.2f;
-    [SerializeField] private float sanityDropAmountPerEvent = 10f;
+
     private float maxSanity;
     private PlayerController playerController;
 
+    private void OnEnable()
+    {
+        EventService.Instance.OnRatRush.AddListener(OnSupernaturalEvent);
+    }
+    private void OnDisable()
+    {
+        EventService.Instance.OnRatRush.RemoveListener(OnSupernaturalEvent);
+    }
     private void Start()
     {
         maxSanity = sanityLevel;
         playerController = GameService.Instance.GetPlayerController();
     }
+
     void Update()
     {
         if (playerController.PlayerState == PlayerState.Dead)
@@ -55,11 +64,12 @@ public class PlayerSanity : MonoBehaviour
     }
     private void OnSupernaturalEvent()
     {
-        increaseSanity(sanityDropAmountPerEvent);
+        increaseSanity(sanityDropRate);
     }
 
     private void OnDrankPotion(int potionEffect)
     {
         decreaseSanity(potionEffect);
     }
+
 }
