@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class DoorView : MonoBehaviour, IInteractable
+public class DoorView : MonoBehaviour, IInteractable
 {
     [SerializeField] private float swingAngle;
     [SerializeField] private int keysRequiredToOpen;
