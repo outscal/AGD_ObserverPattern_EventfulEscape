@@ -1801,11 +1801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0c66bf78d82c646a0daaf9ba705624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instructionsSO:
-  - {fileID: 11400000, guid: a67079eb10ed37c4881b56d00e1fd77b, type: 2}
-  - {fileID: 11400000, guid: 976eff6108d80554e8c16108f7dee769, type: 2}
-  - {fileID: 11400000, guid: 817f4db30166bfd45ac31f0c8901fdb4, type: 2}
-  instructionDisplayDuration: 6
   rootViewPanel: {fileID: 574964454}
   insanityImage: {fileID: 1506977975}
   redVignette: {fileID: 1550849811}
@@ -1913,7 +1908,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sanityLevel: 100
   sanityDropRate: 0.2
-  sanityDropAmountPerEvent: 10
 --- !u!114 &4600010124367288004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2342,7 +2336,12 @@ PrefabInstance:
       propertyPath: soundService
       value: 
       objectReference: {fileID: 203687011}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8410985324760981946, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
+    - {fileID: 6752750673610657977, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
+    - {fileID: 8410985324735834856, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
+    - {fileID: 3542250534102899431, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
+    - {fileID: 6752750674094668609, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d2470b45bfcea9e4780d1866d7cd0f8c, type: 3}
 --- !u!65 &8225950124344110251
 BoxCollider:

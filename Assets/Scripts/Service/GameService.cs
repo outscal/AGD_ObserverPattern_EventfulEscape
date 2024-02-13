@@ -18,9 +18,6 @@ public class GameService : GenericMonoSingleton<GameService>
 
     private void Start() => playerController = new PlayerController(playerView, playerScriptableObject);
 
-    //Todo - Ask Mayank -> Converting all these into properties as {get;private set;} is good or 
-    // we can keep it same for now?
-
     public PlayerController GetPlayerController() => playerController;
     public GameUIView GetGameUI() => gameUIView;
     public InstructionView GetInstructionView() => instructionView;
