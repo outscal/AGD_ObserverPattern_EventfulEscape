@@ -38,5 +38,4 @@ public class PlayerView : MonoBehaviour
         }
     }
     public void SetController(PlayerController _playerController) => playerController = _playerController;
-
 }
