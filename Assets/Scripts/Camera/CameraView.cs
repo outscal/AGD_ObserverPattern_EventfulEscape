@@ -9,28 +9,8 @@ public class CameraView : MonoBehaviour
 
     private float sensitivity = 1f;
     private const float rotationLimit = 0.5f;
-    private Coroutine shakeCorroutine;
 
-    private void OnEnable()
-    {
-        EventService.Instance.LightsOffByGhostEvent.AddListener(Shake);
-        EventService.Instance.PlayerDeathEvent.AddListener(Shake);
-        EventService.Instance.RatRushEvent.AddListener(Shake);
-        EventService.Instance.SkullDropEvent.AddListener(Shake);
-    }
-
-    private void OnDisable()
-    {
-        EventService.Instance.LightsOffByGhostEvent.RemoveListener(Shake);
-        EventService.Instance.PlayerDeathEvent.RemoveListener(Shake);
-        EventService.Instance.RatRushEvent.RemoveListener(Shake);
-        EventService.Instance.SkullDropEvent.RemoveListener(Shake);
-    }
-
-    private void Start()
-    {
-        originalPosition = transform.localPosition;
-    }
+    private void Start() => originalPosition = transform.localPosition;
 
     private void Update()
     {
@@ -48,36 +28,5 @@ public class CameraView : MonoBehaviour
         {
             transform.Rotate(-velocity, 0, 0);
         }
-    }
-
-    private void Shake()
-    {
-        if (shakeCorroutine != null)
-            stopCoroutine(shakeCorroutine);
-        shakeCorroutine = StartCoroutine(ShakeCoroutine(defaultShakeDuration, defaultShakeMagnitude));
-    }
-
-    private IEnumerator ShakeCoroutine(float shakeDuration, float shakeMagnitude)
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < shakeDuration)
-        {
-            float x = Random.Range(-shakeMagnitude, shakeMagnitude);
-            float y = Random.Range(-shakeMagnitude, shakeMagnitude);
-            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y, originalPosition.z);
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        transform.localPosition = originalPosition;
-        stopCoroutine(shakeCorroutine);
-    }
-
-    private void stopCoroutine(Coroutine coroutine)
-    {
-        StopCoroutine(coroutine);
-        coroutine = null;
     }
 }
