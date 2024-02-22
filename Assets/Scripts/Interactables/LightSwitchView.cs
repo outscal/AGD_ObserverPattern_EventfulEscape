@@ -7,7 +7,7 @@ public class LightSwitchView : MonoBehaviour, IInteractable
     [SerializeField] private List<Light> lightsources = new List<Light>();
     private SwitchState currentState;
     public delegate void LightSwitchDelegate();
-    public static LightSwitchDelegate lightToggled;
+    public static event LightSwitchDelegate lightToggled;
 
     private void OnEnable() => lightToggled += onLightSwitch;
 
