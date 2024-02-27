@@ -9,7 +9,7 @@ public class PlayerEscapedEvent : MonoBehaviour
         if (other.GetComponent<PlayerView>() != null)
         {
             GameService.Instance.GetSoundView().PlaySoundEffects(soundToPlay);
-            EventService.Instance.PlayerEscapedEvent.InvokeEvent();
+            EventService.Instance.OnPlayerEscapedEvent.InvokeEvent();
         }
     }
 }
