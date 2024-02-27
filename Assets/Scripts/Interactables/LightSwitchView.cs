@@ -46,14 +46,7 @@ public class LightSwitchView : MonoBehaviour, IInteractable
             lightSource.enabled = lights;
         }
     }
-
-    private void onLightSwitch()
-    {
-        toggleLights();
-        GameService.Instance.GetSoundView().PlaySoundEffects(SoundType.SwitchSound);
-        GameService.Instance.GetInstructionView().HideInstruction();
-    }
-
+   
     private void setLights(bool light)
     {
         foreach (Light lightSource in lightsources)
@@ -69,10 +62,18 @@ public class LightSwitchView : MonoBehaviour, IInteractable
             currentState = SwitchState.Off;
         }
     }
+
+    private void onLightSwitch()
+    {
+        toggleLights();
+        GameService.Instance.GetSoundView().PlaySoundEffects(SoundType.SwitchSound);
+        GameService.Instance.GetInstructionView().HideInstruction();
+    }
+
     private void onLightTurnedOffByGhost()
     {
         setLights(false);
         GameService.Instance.GetSoundView().PlaySoundEffects(SoundType.SwitchSound);
-        GameService.Instance.GetInstructionView().HideInstruction();
+        GameService.Instance.GetInstructionView().ShowInstruction(InstructionType.LightsOff);
     }
 }
