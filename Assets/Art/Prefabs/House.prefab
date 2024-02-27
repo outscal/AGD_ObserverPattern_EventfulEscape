@@ -13297,7 +13297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keysRequiredToTrigger: 1
-  soundToPlay: 4
+  soundType: 4
 --- !u!1 &7927258282318190006
 GameObject:
   m_ObjectHideFlags: 0
