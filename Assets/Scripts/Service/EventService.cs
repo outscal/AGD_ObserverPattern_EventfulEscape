@@ -1,4 +1,3 @@
-
 public class EventService
 {
     private static EventService instance;
@@ -20,5 +19,6 @@ public class EventService
     public EventService()
     {
         OnLightSwitchToggled = new EventController();
+        OnKeyPickedUp = new EventController<int>();
     }
 }
